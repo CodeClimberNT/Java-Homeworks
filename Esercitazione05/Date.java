@@ -4,13 +4,13 @@ public class Date {
     private String month, completeString;
     private boolean flag = false;
 
-    public Date(int g, int a) { // input GGG AAAA
+    public Date(int g, int a) {                                                                     // input GGG AAAA
         if (a < 0) {
             System.out.println("Non posso calcolare anni prima di Cristo");
             return;
         }
         this.year = a;
-        if (this.year % 400 == 0) { // calcolo mese bisestile
+        if (this.year % 400 == 0) {                                                                 // calcolo mese bisestile
             this.daysInMonth[1] = 29;
             if (g > 366) {
                 System.out.println("Errore inserimento dati");
@@ -31,7 +31,7 @@ public class Date {
 
     }
 
-    public Date(int g, int m, int a) { // input GG/MM/AA
+    public Date(int g, int m, int a) {                                                                  // input GG/MM/AA
         if (a < 0) {
             System.out.println("Non posso calcolare anni prima di Cristo");
             return;
@@ -45,7 +45,7 @@ public class Date {
         }
 
         this.year = a;
-        if (this.year % 400 == 0) { // calcolo mese bisestile
+        if (this.year % 400 == 0) {                                                                 // calcolo mese bisestile
             this.daysInMonth[1] = 29;
         } else if (this.year % 4 == 0 && !(this.year % 100 == 0)) {
             this.daysInMonth[1] = 29;
@@ -57,14 +57,14 @@ public class Date {
         }
     }
 
-    public Date(int g, String m, int a) { // input GG month AAAA (Ex. 14 Giugno 1992)
+    public Date(int g, String m, int a) {                                                           // input GG month AAAA (Ex. 14 Giugno 1992)
         if (a < 0) {
             System.out.println("Non posso calcolare anni prima di Cristo");
             return;
         }
 
         this.year = a;
-        if (this.year % 400 == 0) { // calcolo mese bisestile
+        if (this.year % 400 == 0) {                                                                 // calcolo mese bisestile
             this.daysInMonth[1] = 29;
         } else if (this.year % 4 == 0 && !(this.year % 100 == 0)) {
             this.daysInMonth[1] = 29;
@@ -130,7 +130,7 @@ public class Date {
         }
     }
 
-    public Date(String gmt) { // input stile gmt yyyy-mm-dd
+    public Date(String gmt) {                                                                       // input stile gmt yyyy-mm-dd
         String dateArray[] = gmt.split("-");
         this.year = Integer.valueOf(dateArray[0]);
 
@@ -139,7 +139,7 @@ public class Date {
             return;
         }
 
-        if (this.year % 400 == 0) { // calcolo mese bisestile
+        if (this.year % 400 == 0) {                                                         // calcolo mese bisestile
             this.daysInMonth[1] = 29;
         } else if (this.year % 4 == 0 && !(this.year % 100 == 0)) {
             this.daysInMonth[1] = 29;
@@ -161,24 +161,24 @@ public class Date {
         System.out.println(this.day);
     }
 
-    public String toString() { // metodo toString
+    public String toString() {                                                                  // metodo toString
         flag = true;
         stampa3();
         return completeString;
     }
 
-    public boolean equals(Date altro) { // metodo equals tra due date
+    public boolean equals(Date altro) {                                                     // metodo equals tra due date
         if (this.day == altro.day && this.year == altro.year) {
             return true;
         }
         return false;
     }
 
-    public void stampa1() { // stampa stile GGG AAAA
+    public void stampa1() {                                                                 // stampa stile GGG AAAA
         System.out.println(this.day + " " + this.year);
     }
 
-    public void stampa2() { // stampa stile GG/MM/AA
+    public void stampa2() {                                                                 // stampa stile GG/MM/AA
         temp = this.day;
         int i;
         for (i = 0; i < daysInMonth.length; i++) {
@@ -189,10 +189,10 @@ public class Date {
             }
         }
 
-        System.out.println(temp + "/" + (i + 1) + "/" + Math.abs(this.year % 100));
+        System.out.println(temp + "/" + String.format("%02d", i + 1) + "/" + Math.abs(this.year % 100));
     }
 
-    public void stampa3() { // stampa stile GG month AAAA
+    public void stampa3() {                                                                     // stampa stile GG month AAAA
         int temp = this.day;
         int i;
         for (i = 0; i < daysInMonth.length; i++) {
@@ -264,7 +264,7 @@ public class Date {
         flag = false;
     }
 
-    public void stampa4() { // stampa stile gtm yyyy-mm-dd
+    public void stampa4() {                                                                         // stampa stile gtm yyyy-mm-dd
         int temp = this.day;
         int i;
         for (i = 0; i < daysInMonth.length; i++) {

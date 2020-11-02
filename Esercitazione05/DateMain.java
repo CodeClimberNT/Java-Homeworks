@@ -1,9 +1,9 @@
 public class DateMain {
     public static void main(String args[]){
-        Date d1 = new Date(2, 11, 2020);
+        Date d1 = new Date(25, 3, 2020);
         Date d2 = new Date(1, 2021);
         Date d3 = new Date(2, "Novembre", 2020);
-        Date d4 = new Date("2020-2-30");
+        Date d4 = new Date("2020-2-26");
 
         System.out.println(d1);
         System.out.println(d2);
