@@ -1,9 +1,9 @@
 public class DateMain {
     public static void main(String args[]){
-        Date d1 = new Date(25, 3, 2020);
+        Date d1 = new Date(26, 11, 2020);
         Date d2 = new Date(1, 2021);
-        Date d3 = new Date(2, "Novembre", 2020);
-        Date d4 = new Date("2020-2-26");
+        Date d3 = new Date(26, "Novembre", 2020);
+        Date d4 = new Date("2020-11-26");
 
         System.out.println(d1);
         System.out.println(d2);
@@ -20,7 +20,6 @@ public class DateMain {
         if(d1.equals(d2)){
             System.out.println("d1 e d2 uguali");
         }
-
         if(d1.equals(d3)){
             System.out.println("d1 e d3 uguali");
         }

@@ -1,76 +1,190 @@
 public class Date {
-    private int day, year, temp;
+    private int day, year;
     private int daysInMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    private String month, completeString;
-    private boolean flag = false;
+    boolean bisestile;
 
-    public Date(int g, int a) {                                                                     // input GGG AAAA
+    
+
+
+
+    /*<---------------------------------COSTRUTTORI---------------------------------> */
+
+        /* input GGG AAAA */
+    public Date(int g, int a) {                                                                     
         if (a < 0) {
             System.out.println("Non posso calcolare anni prima di Cristo");
             return;
         }
+
         this.year = a;
-        if (this.year % 400 == 0) {                                                                 // calcolo mese bisestile
-            this.daysInMonth[1] = 29;
-            if (g > 366) {
-                System.out.println("Errore inserimento dati");
-                return;
-            }
-        } else if (this.year % 4 == 0 && !(this.year % 100 == 0)) {
-            this.daysInMonth[1] = 29;
-            if (g > 366) {
-                System.out.println("Errore inserimento dati");
-                return;
-            }
+        this.day = g;
+        setBisestile(a);
+    }
+
+        /* input GG/MM/AA */
+    public Date(int g, int m, int a) {                                                                  
+        if (a < 0) {
+            System.out.println("Non posso calcolare anni prima di Cristo");
+            return;
         }
-        if (g > 365) {
+        
+        this.year = a;
+        this.day = daysAndMonthToDays(g, m);
+        setBisestile(a);
+        if  (( g > 29 && m == 2 && bisestile) ||
+             ( g > 28 && m == 2 && !bisestile)) {
             System.out.println("Errore inserimento dati");
             return;
         }
-        this.day = g;
-
     }
 
-    public Date(int g, int m, int a) {                                                                  // input GG/MM/AA
+        /* input GG month AAAA (Ex. 14 Giugno 1992) */
+    public Date(int g, String m, int a) {                                                           
         if (a < 0) {
             System.out.println("Non posso calcolare anni prima di Cristo");
             return;
         }
-        if (m > 12) {
-            System.out.println("Errore numero del mese");
-        }
-        if (g > daysInMonth[m - 1]) {
+        int month = stringMonthToInt(m);
+        
+        this.year = a;
+        this.day = daysAndMonthToDays(g, month);
+        setBisestile(a);
+        if  (( g > 29 && month == 2 && bisestile) ||
+             ( g > 28 && month == 2 && !bisestile)) {
             System.out.println("Errore inserimento dati");
             return;
         }
-
-        this.year = a;
-        if (this.year % 400 == 0) {                                                                 // calcolo mese bisestile
-            this.daysInMonth[1] = 29;
-        } else if (this.year % 4 == 0 && !(this.year % 100 == 0)) {
-            this.daysInMonth[1] = 29;
-        }
-
-        this.day = g;
-        for (int i = 0; i < m - 1; i++) {
-            this.day += this.daysInMonth[i];
-        }
     }
 
-    public Date(int g, String m, int a) {                                                           // input GG month AAAA (Ex. 14 Giugno 1992)
-        if (a < 0) {
+        /* input stile GMT YYYY-MM-DD */
+    public Date(String gmt) {
+        String dateArray[] = gmt.split("-");
+        int year = Integer.valueOf(dateArray[0]);
+        if (year < 0) {
             System.out.println("Non posso calcolare anni prima di Cristo");
             return;
         }
 
-        this.year = a;
-        if (this.year % 400 == 0) {                                                                 // calcolo mese bisestile
-            this.daysInMonth[1] = 29;
-        } else if (this.year % 4 == 0 && !(this.year % 100 == 0)) {
-            this.daysInMonth[1] = 29;
+        int m = Integer.valueOf(dateArray[1]);
+        int g = Integer.valueOf(dateArray[2]);
+        
+        this.year = year;
+        this.day = daysAndMonthToDays(g, m);
+        setBisestile(Integer.valueOf(dateArray[0]));
+        if  (( g > 29 && m == 2 && bisestile) ||
+             ( g > 28 && m == 2 && !bisestile)) {
+            System.out.println("Errore inserimento dati");
+            return;
+        }
+    }
+
+
+
+
+
+    /* <---------------------------------METODI PUBBLICI---------------------------------> */
+        /* Ritorna stringa stile "DD month YYYY" */
+    public String toString() {
+        return daysToDaysAndMonth(this.day)[0] + " " + intMonthToString(daysToDaysAndMonth(this.day)[1]) + " " + this.year;
+    }
+        /* Confronto tra due Date */
+    public boolean equals(Date altro) {
+        if (this.day == altro.day && this.year == altro.year) {
+            return true;
+        }
+        return false;
+    }
+
+        /* stampa stile DDD YYYY */
+    public void stampa1() {                                                                 
+        System.out.println(this.day + " " + this.year);
+    }
+
+        /* stampa stile DD/MM/YY */
+    public void stampa2() {                                                                 
+        int shortDays = daysToDaysAndMonth(this.day)[0];
+        int month = daysToDaysAndMonth(this.day)[1]; 
+
+        System.out.println(shortDays + "/" + String.format("%02d", month) + "/" + Math.abs(this.year % 100));
+    }
+
+        /* stampa stile DD month YYYY */
+    public void stampa3() {                                                                     
+        int shortDays = daysToDaysAndMonth(this.day)[0];
+        String month = intMonthToString(daysToDaysAndMonth(this.day)[1]);
+
+        System.out.println(shortDays + " " + month + " " + this.year);
+    }
+
+        /* stampa stile GMT YYYY-MM-DD */
+    public void stampa4() {                                                                      
+        int shortDays = daysToDaysAndMonth(this.day)[0];
+        int month = daysToDaysAndMonth(this.day)[1];                                                                   
+
+        System.out.println(this.year + "-" + String.format("%02d", month) + "-" + String.format("%02d", shortDays));
+    }
+
+
+
+
+
+    /* <---------------------------------METODI PRIVATI---------------------------------> */
+    
+        /* CONVERT DDDD FORMAT TO DD/MM FORMAT */
+    private int[] daysToDaysAndMonth(int day){
+        int dm[] = new int [2];
+        int month;
+
+        for (month = 0; month < daysInMonth.length; month++) {
+            if (day > daysInMonth[month]) {
+                day -= daysInMonth[month];
+            } else {
+                break;
+            }
         }
 
-        int month = 0;
+        dm[0] = day;
+        dm[1] = (month+1);
+        return dm;
+    }
+
+        /* CONVERT DD/MM FORMAT TO DDDD FORMAT */
+    private int daysAndMonthToDays(int day, int month){
+        for (int i = 0; i < month - 1; i++) {
+            day += this.daysInMonth[i];
+        }
+        return day;
+    }
+
+        /* IMPOSTA MESE BISESTILE DAL VALORE DELL'ANNO */
+    private void setBisestile(int a){
+        if (a % 400 == 0) {                                                                
+            this.daysInMonth[1] = 29;
+            this.bisestile = true;
+            if (this.day > 366) {
+                System.out.println("Errore inserimento dati");
+                return;
+            }
+            return;
+        } else if (a % 4 == 0 && !(a % 100 == 0)) {
+            this.daysInMonth[1] = 29;
+            this.bisestile = true;
+            if (this.day > 366) {
+                System.out.println("Errore inserimento dati");
+                return;
+            }
+            return;
+        }
+        this.bisestile = false;
+        if (this.day > 365) {
+            System.out.println("Errore inserimento dati");
+            return;
+        }
+    }
+
+        /* CONVERT STRING MONTH TO INTEGER MONTH */
+    private int stringMonthToInt(String m){
+        int month;
         switch (m.toLowerCase().trim()) {
             case "gennaio":
                 month = 1;
@@ -122,88 +236,15 @@ public class Date {
 
             default:
                 System.out.println("Errore nome mese");
-                return;
+                return 0;
         }
-        this.day = g;
-        for (int i = 0; i < month - 1; i++) {
-            this.day += this.daysInMonth[i];
-        }
+        return month;
     }
 
-    public Date(String gmt) {                                                                       // input stile gmt yyyy-mm-dd
-        String dateArray[] = gmt.split("-");
-        this.year = Integer.valueOf(dateArray[0]);
-
-        if (this.year < 0) {
-            System.out.println("Non posso calcolare anni prima di Cristo");
-            return;
-        }
-
-        if (this.year % 400 == 0) {                                                         // calcolo mese bisestile
-            this.daysInMonth[1] = 29;
-        } else if (this.year % 4 == 0 && !(this.year % 100 == 0)) {
-            this.daysInMonth[1] = 29;
-        }
-
-        int month = Integer.valueOf(dateArray[1]);
-        if (month > 12) {
-            System.out.println("Errore numero del mese");
-        }
-
-        this.day = Integer.valueOf(dateArray[2]);
-        if (this.day > this.daysInMonth[month - 1]) {
-            System.out.println("Errore numero di giorni");
-        }
-
-        for (int i = 0; i < month - 1; i++) {
-            this.day += this.daysInMonth[i];
-        }
-        System.out.println(this.day);
-    }
-
-    public String toString() {                                                                  // metodo toString
-        flag = true;
-        stampa3();
-        return completeString;
-    }
-
-    public boolean equals(Date altro) {                                                     // metodo equals tra due date
-        if (this.day == altro.day && this.year == altro.year) {
-            return true;
-        }
-        return false;
-    }
-
-    public void stampa1() {                                                                 // stampa stile GGG AAAA
-        System.out.println(this.day + " " + this.year);
-    }
-
-    public void stampa2() {                                                                 // stampa stile GG/MM/AA
-        temp = this.day;
-        int i;
-        for (i = 0; i < daysInMonth.length; i++) {
-            if (temp > daysInMonth[i]) {
-                temp -= daysInMonth[i];
-            } else {
-                break;
-            }
-        }
-
-        System.out.println(temp + "/" + String.format("%02d", i + 1) + "/" + Math.abs(this.year % 100));
-    }
-
-    public void stampa3() {                                                                     // stampa stile GG month AAAA
-        int temp = this.day;
-        int i;
-        for (i = 0; i < daysInMonth.length; i++) {
-            if (temp > daysInMonth[i]) {
-                temp -= daysInMonth[i];
-            } else {
-                break;
-            }
-        }
-        i++;
-        switch (i) {
+        /* CONVERT INTEGER MONTH TO STRING MONTH */
+    private String intMonthToString(int m){
+        String month;
+        switch (m) {
             case 1:
                 month = "Gennaio";
                 break;
@@ -254,28 +295,8 @@ public class Date {
 
             default:
                 System.out.println("Errore logico grave");
-                return;
+                return "";
         }
-
-        completeString = temp + " " + month + " " + this.year;
-        if (!flag) {
-            System.out.println(temp + " " + month + " " + this.year);
-        }
-        flag = false;
+        return month;
     }
-
-    public void stampa4() {                                                                         // stampa stile gtm yyyy-mm-dd
-        int temp = this.day;
-        int i;
-        for (i = 0; i < daysInMonth.length; i++) {
-            if (temp > daysInMonth[i]) {
-                temp -= daysInMonth[i];
-            } else {
-                break;
-            }
-        }
-        i++;
-        System.out.println(this.year + "-" + String.format("%02d", i) + "-" + String.format("%02d", temp));
-    }
-
 }
