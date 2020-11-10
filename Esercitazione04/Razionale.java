@@ -57,4 +57,5 @@ public class Razionale {
         this.numeratore /= mcd;
         this.denominatore /= mcd;
     }
+
 }
