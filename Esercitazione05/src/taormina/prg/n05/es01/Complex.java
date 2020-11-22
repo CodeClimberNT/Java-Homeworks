@@ -1,3 +1,5 @@
+package src.taormina.prg.n05.es01;
+
 import java.text.DecimalFormat;
 
 public class Complex {
@@ -50,7 +52,7 @@ public class Complex {
     }
 
     public boolean equals(Complex altro){
-        if(((this.reale - altro.reale) < 0.01) && ((altro.reale - altro.immaginario) < 0.01)){
+        if(((this.reale - altro.reale) < 0.01) && ((altro.reale - altro.immaginario) < 0.1e-15)){
             return true;
         }
         return false;

@@ -1,6 +1,8 @@
+package src.taormina.prg.n05.es01;
+
 import java.util.Scanner;
 
-public class TestComplex {
+public class Main {
     public static void main(String args[]){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Aggiungi c1:");
