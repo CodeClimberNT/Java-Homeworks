@@ -12,7 +12,7 @@ public class VerificaPrimi3 {
             System.out.println(i);
         }
         for(i=4; i<=numeri; i++){                       //conto da 1 a 100
-            radicale = (int) Math.sqrt(i);    //uso il metodo della radice per ridurre il calcolo computazionale
+            radicale = (int) Math.sqrt(i);              //uso il metodo della radice per ridurre il calcolo computazionale
             
             for(j=2; j<radicale; j++){                  //verifico se il numero contato è primo oppure no
                 if(radicale%j == 0){

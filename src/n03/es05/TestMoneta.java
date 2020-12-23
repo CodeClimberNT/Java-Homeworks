@@ -11,7 +11,9 @@ public class TestMoneta {
                 numCroce++;
             }
         }
+
         percentuale = (numCroce * 100 / lanciMoneta);
         System.out.println(Math.round(percentuale) +"%");
+      
     }
 }

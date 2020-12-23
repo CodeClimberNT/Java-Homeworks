@@ -17,6 +17,5 @@ public class SommaMatrici {
             }
             System.out.println();
         }
-        
     }
 }

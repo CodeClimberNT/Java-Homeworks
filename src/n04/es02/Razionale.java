@@ -51,8 +51,12 @@ public class Razionale {
 
     private void semplifica(){
         int mcd = 1;
-        for (int i = 1; i <= this.numeratore && i <= this.denominatore; i++){
-            if(this.numeratore %i == 0 && this.denominatore %i == 0){
+        if(this.numeratore < 0 && this.denominatore < 0) {
+            this.numeratore *= -1;
+            this.denominatore *= -1;
+        }
+        for (int i = 1; i <= Math.abs(this.numeratore) && i <= Math.abs(this.denominatore); i++){
+            if(this.numeratore % i == 0 && this.denominatore % i == 0){
                 mcd = i;
             }
         }

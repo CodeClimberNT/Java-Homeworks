@@ -9,15 +9,15 @@ public class Date {
 
 
 
-    /*<---------------------------------COSTRUTTORI---------------------------------> */
+    /* <---------------------------------COSTRUTTORI---------------------------------> */
 
         /* input GGG AAAA */
-    public Date(int g, int a) {                                                                     
+    public Date(int g, int a) {
         setDaysAndYears(g, a);
     }
 
         /* input GG/MM/AA */
-    public Date(int g, int m, int a) {                                                                  
+    public Date(int g, int m, int a) {
         setDayIntMonthYear(g, m, a);
     }
 
@@ -118,7 +118,7 @@ public class Date {
     }
 
         /* stampa stile DD/MM/YY */
-    public void stampa2() {                                                                 
+    public void stampa2() {
         int shortDays = daysToDaysAndMonth(this.day)[0];
         int month = daysToDaysAndMonth(this.day)[1]; 
 
@@ -126,7 +126,7 @@ public class Date {
     }
 
         /* stampa stile DD month YYYY */
-    public void stampa3() {                                                                     
+    public void stampa3() {
         int shortDays = daysToDaysAndMonth(this.day)[0];
         String month = intMonthToString(daysToDaysAndMonth(this.day)[1]);
 
@@ -134,7 +134,7 @@ public class Date {
     }
 
         /* stampa stile GMT YYYY-MM-DD */
-    public void stampa4() {                                                                      
+    public void stampa4() {
         int shortDays = daysToDaysAndMonth(this.day)[0];
         int month = daysToDaysAndMonth(this.day)[1];                                                                   
 

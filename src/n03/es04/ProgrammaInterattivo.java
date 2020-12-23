@@ -8,8 +8,8 @@ public class ProgrammaInterattivo {
         String stringa = "";
         String banned[]= {"alfa", "beta", "gamma", "delta", "epsilon", "kappa", "lambda", "sigma", "omega"};
         boolean flag=false;
-
-        System.out.println("Digita qualcosa e batti enter, oppure " + "scrivi \"fine\" per terminare il programma");
+ 
+        System.out.println("Digita qualcosa e batti enter, oppure scrivi \"fine\" per terminare il programma");
         while(!(stringa = scanner.next()).equals("fine")) {
 
             for(int i=0; i<banned.length; i++){
@@ -18,7 +18,6 @@ public class ProgrammaInterattivo {
                     flag=true;
                     break;
                 }else flag = false;
-                
             }
             if(!flag){
                 System.out.println("Hai digitato " + stringa.toUpperCase() + "!");

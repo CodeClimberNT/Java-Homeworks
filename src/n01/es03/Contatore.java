@@ -1,7 +1,8 @@
 package n01.es03;
 
 public class Contatore {
-    public static void main(String[] args){
+    public static void main(String args[]){
+
         System.out.println("Hai inserito " + args.length + " argomenti");
         for(int i = args.length-1; i>=0; i--){
             System.out.println(args[i]);
@@ -11,6 +12,5 @@ public class Contatore {
                 System.out.println(args[i]);
             }
         }
-        System.out.println(args[-1]);
     }
 }

@@ -15,7 +15,5 @@ public class TestTipo{
         System.out.println(r2);
         System.out.println(r3);
         System.out.println(r4);
-
-        return;
     }
 }

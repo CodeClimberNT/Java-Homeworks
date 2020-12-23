@@ -14,7 +14,6 @@ public class Rettangolo {
         base = b;
         altezza = h;
     }
-    
     public int perimetro(){
         return base*2 + altezza*2;
     }

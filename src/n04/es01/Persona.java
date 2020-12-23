@@ -29,9 +29,11 @@ public class Persona {
     public String getNome(){
         return this.nome;
     }
+
     public String getCognome(){
         return this.cognome;
     }
+    
     public int getEta(){
         return this.eta;
     }
@@ -39,7 +41,7 @@ public class Persona {
     public boolean equals(Persona altro){
         if( ( this.nome.equals(altro.getNome()       ) ) && 
             ( this.cognome.equals(altro.getCognome() ) ) && 
-            ( this.eta == altro.getEta()                ) ){
+            ( this.eta == altro.getEta()               ) ){
             return true;
         }
         return false;
