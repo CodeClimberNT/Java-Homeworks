@@ -21,7 +21,6 @@ public class Stack<T> {
     }
 
     public T pop(){
-        String temp = null;
         if(!data.isEmpty()){
             return data.remove(data.size()-1);
         }
