@@ -1,6 +1,6 @@
 package n06.es01;
 
-public abstract class  Shape {
+public abstract class Shape {
     private String color;
     private boolean filled;
 

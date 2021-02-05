@@ -2,10 +2,10 @@ package n04bis.es03;
 
 public class Date {
     private int day, year;
-    private int daysInMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    private int daysInMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     boolean bisestile;
 
-    
+
 
 
 
